@@ -1,0 +1,11 @@
+x = [0 2 4 6 8 10];
+y = [0 5 17 85 105 175];
+roll_no = 40;
+a = y(1)/(x(1)^roll_no);
+x_curve = 0:0.1:10; 
+y_curve = a * x_curve.^roll_no;
+plot(x, y, x_curve, y_curve);
+xlabel('x');
+ylabel('y');
+title('Plot of y = ax^{40} and the given points');
+legend('Given Points', 'Curve');

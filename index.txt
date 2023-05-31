@@ -1,0 +1,254 @@
+Matlab
+
+Q. Curve Fitting : Polynomial
+
+x=[0 2 4 6 8];
+y=[5 29 125 341 725];
+n=3;
+p=polyfit(x,y,n)
+X=x';
+Y=y';
+% q=fit(X,Y,'poly3') % ployn function
+plot(x,y,'hk')      % for plotting points only
+hold on
+X=x(1):0.01:x(end); % for plotting function or polynomial:;
+                    % x(end) last value
+                    % x cordinate on p or q
+Y1=polyval(p,X);    % y cordinate of p
+%Y2=q(X);           % y cordinate of q
+plot(X,Y1,':r')
+
+Q. Curve Fitting : EXPONETIAL
+
+x=0:0.5:5;
+y=[6 4.83 3.7 3.15 2.47 1.83 1.49 1.21 0.96 0.73 0.64]
+n=1
+p=polyfit(x,log(y),n)
+% X=x';
+% Y=y';
+b=p(1)
+a=exp(p(2))
+                                   %y=a*e^(b *x)
+fprintf('y=%d e^(%dx)',a,b)
+plot(x,y,'o')      
+hold on
+X=x(1):0.1:x(end);
+Y=a.*exp(b.*X);
+plot(X,Y,'r-')
+
+
+
+Q. MESH AND SURFACE PLOT:
+
+
+x=-2:0.1:2;
+y=-3:0.1:4;
+[X,Y]=meshgrid(x,y)
+
+Z=8-X.^2-9.*Y.^2;        % Z cordinate
+subplot(2,1,1)
+surf(X,Y,Z)              % COMMAND FOR SURFACE PLOT    
+xlabel("x")
+ylabel("y")
+zlabel("z")
+title("SURFACE PLOT")
+grid on 
+
+subplot(2,1,2)
+mesh(X,Y,Z)              % FOR WHITE % FOR MESH SURFACE PLOT
+xlabel("x")
+ylabel("y")
+zlabel("z")
+title("MESH PLOT")
+grid on 
+
+Q. 3D Plotting
+
+t=0:0.1:6*pi;          % FOR SMOOTH CURVE USE MINIMUM STEP SIZE
+x=sqrt(t).*sin(2*t)      % t.^(1/2) OR t.^0.5 OR power(t,0.5) OR nthroot(t,2)
+y=sqrt(t).*cos(2*t)
+z=t/2
+plot3(x,y,z)
+xlabel("x")
+ylabel("y")
+zlabel("z")
+title("Cyclone Plot")
+grid on 
+
+Q. Numerical Integral
+
+% Evaluation of integration by numerical method:
+a=(0.5/2)*(1+(1/3)+2*(1/1.5+1/2+1/2.5))  % numerical
+b=log(3)-log(1)                          % analytic
+error=1.0986-1.1167
+
+%%
+% trapezoidal rule:
+% x:[1 1.5 2 2.5 3]
+% y:[1 1/1.5 1/2 1/2.5 1/3]
+
+x=input("Enter values of x:");
+y=input("Enter values of y:");
+h=x(2)-x(1);
+n=length(x)
+a=0;
+for i=2:n-1
+    a=a+y(i);
+end
+I=h/2*(y(1)+y(n)+2*a)
+
+% simpson's 1/3 rule:
+
+x=input("Enter values of x:");
+y=input("Enter values of y:");
+h=x(2)-x(1)
+n=length(x)
+a=0;
+b=0;
+for i=2:n-1
+    if rem(i,2)==0
+        a=a+y(i);
+    else
+        b=b+y(i);
+    end
+end
+I=h/3*(y(1)+y(n)+4*a+2*b)
+
+%%
+
+% simpson's 3/8th rule:
+
+% Enter values of x:[1 1.5 2 2.5 3 3.5 4]
+% Enter values of y:[1 1/1.5 1/2 1/2.5 1/3 1/3.5 1/4]
+x=input("Enter values of x:");
+y=input("Enter values of y:");
+h=x(2)-x(1)
+n=length(x)
+a=0;
+b=0;
+for i=2:n-1
+    if rem(i-1,3)==0
+        b=b+y(i);
+    else
+        a=a+y(i);
+    end
+end
+I=3*h/8*(y(1)+y(n)+3*b+2*a)
+
+
+
+Q. LAGRANGES INTERPOLATION:
+
+x=input("Enter values of x:");   %[0.1 0.2 0.3 0.4 0.5]
+y=input("Enter values of y:");   %[1.4 1.56 1.76 2 2.28]
+X=input("Enter values of X:");   %0.23
+n=length(x);
+Y=0;
+for i=1:n
+    L=1;
+    for j=1:n
+        if j~=i
+            L=L*((X-x(j)))/(x(i)-x(j));
+
+        end
+    end
+    Y=Y+L*y(i);
+end
+disp(Y)
+
+Q.NEWTONS INTERPOLATION:
+FORWARD NEWTONS INTERPOLATION
+
+x = input("Enter the X Coordinate");
+y = input("Enter the Y Coordinate");
+X = input("Enter the value of X");
+n = length(x);
+h = x(2)-x(1);
+u = (X-x(1))/h;
+D = y';
+for j = 2:n
+    for i = 1:n-j+1
+        D(i,j) = D(i+1,j-1)-D(i,j-1);
+    end
+end
+Y = y(1);
+v = u;
+for i = 2:n
+    Y = Y + (v.*D(1,i))./factorial(i-1);
+    v = v*(u-i+1);
+end
+fprintf("Y value is %f ",Y)
+
+BACK NEWTONS INTERPOLATION
+
+x = input("Enter the X Coordinate");
+y = input("Enter the Y Coordinate");
+X = input("Enter the value of X");
+n = length(x);
+h = x(2)-x(1);
+u = (X-x(n))/h;
+D = y';
+for j = 2:n
+    for i = 1:n-j+1
+        D(i,j) = D(i+1,j-1)-D(i,j-1);
+    end
+end
+Y = y(n);
+v = u;
+for i = 2:n
+    Y = Y + (v.*D(n-i+1,i))./factorial(i-1);
+    v = v*(u+i-1);
+end
+fprintf("Y value is %f ",Y)
+
+Q.Euler's Method
+
+% Find y at x = X for dy/dx =F(x,y), y(x1)=y1 by taking step size h.
+%y(x2) = y(x1 + h) = y1 +hf(x1,y1)
+% General Formula : y(xn+1) = y(x1 + nh) = yn + hf(xn,yn)
+
+
+%code
+
+X=input("Enter values of X:");   % single value
+x1=input("Enter values of x1:");   
+y1=input("Enter values of y1:");
+h=input("Enter step size: ");
+syms x y
+f(x,y) = input("Enter function: ");
+n=(X-x1)/h;
+Y=y1;
+M=x1:h:X;
+for i=1:n
+    Y(i+1)=Y(i)+h*f(M(i),Y(i));    % formula
+end
+% y at x=X is Y(n+1)
+fprintf("y at x = %d is %f",X,Y(n+1))
+
+%% 
+Q. 4th order Runge-Kutter Method
+
+X=input("Enter values of X:");   % single value
+x1=input("Enter values of x1:");   
+y1=input("Enter values of y1:");
+h=input("Enter step size: ");
+syms x y
+f(x,y) = input("Enter function: ");
+n=(X-x1)/h;
+Y=y1;
+M=x1:h:X;
+for i=1:n
+    % Y(i+1)=Y(i)+h*f(M(i),Y(i));    % formula
+     k1 = h*f(M(i),Y(i));
+    k2 = h*f(M(i)+h/2,Y(i)+k1/2);
+    k3 = h*f(M(i)+h/2,Y(i)+k2/2);
+    k4 = h*f(M(i)+h,Y(i)+k3);
+    Y(i+1)=Y(i)+(1/6)*(k1 + 2*k2 + 2*k3 + k4);
+
+end
+fprintf("y at x = %d is %f",X,Y(n+1))
+
+
+
+
+
