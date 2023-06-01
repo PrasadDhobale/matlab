@@ -1,0 +1,17 @@
+x data 5 10 20 50 100
+y data 15 33 53 140 301
+Plot with symbol o
+
+x is 0 2 pi/3 with interval of pi/30 
+y is sinx + rand(size(x))/100
+Plot  x vs y with any marker symbol use basic fitting to do a quadratic and cubic fitting.
+show equations plot residuals and show norm of basic 
+
+The following data is obtained from an experiement aimed at measuring the spring constraint of a given string different masses m are hang from 
+the spring and corresponding reflection dell of the spring from its unstretched configuration are measured
+f = kd
+f = mg.
+mg = kd
+m = [    ]
+d = [    ]
+g = 9.8

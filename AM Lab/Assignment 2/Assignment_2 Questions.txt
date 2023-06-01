@@ -1,0 +1,31 @@
+Assignment 2
+FOR LOOP
+Create a vector to represent a quadratic polynomial p(x)= x^2 - 4x +4.
+Create a vector representing a polynomial p(x) = 4x^5-3x^2+2x+33 and solve p(2) by using polyvar.
+Create a matrix x which has values 2,4,5,-1,0,3,7,1,5. and evaluate  p(x)=4x^5-3x^2+2x+33  by using polyval m
+Solve the equation 3x^2-2x-4 create a vector to represent the polynomial and find the roots
+for n=100:-2
+k=1/expo(n)
+WHILE LOOP
+Find out all power of 2 below 10,000 using while loop.
+
+i=1
+num=1
+while num<10000
+v=[v,num]
+num 2^i
+i=i+1
+end
+v%display
+
+i=6, i=21
+ifi>5
+	k=1
+else if(i>1) && (j==20)
+	k=5*i+j
+else
+	k=1;
+end
+k
+
+create vector 2 with start value 0 and end value 360 with an interval of 2pie and y = sin(x)
